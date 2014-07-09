@@ -55,10 +55,10 @@ test('value', function(t){
 test('reference', function(t){
     t.plan(1);
 
-    var x = {a:1},
+    var x = {a:1, b:2},
         whatChanged = new WhatChanged(x);
 
-    x = {a:1};
+    x = {a:1, b:2};
 
     t.deepEqual(
         whatChanged.update(x),

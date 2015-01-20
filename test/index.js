@@ -197,3 +197,27 @@ test('many changes', function(t){
         }
     );
 });
+
+test('dont track value', function(t){
+    t.plan(1);
+
+    var x = 1,
+        whatChanged = new WhatChanged(x, '');
+
+    t.deepEqual(
+        whatChanged.update(2),
+        {}
+    );
+});
+
+test('dont track value type change', function(t){
+    t.plan(1);
+
+    var x = 1,
+        whatChanged = new WhatChanged(x, 'type');
+
+    t.deepEqual(
+        whatChanged.update(true),
+        {type:  true}
+    );
+});

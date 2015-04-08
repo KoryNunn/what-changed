@@ -1,5 +1,4 @@
 var clone = require('clone'),
-    merge = require('flat-merge'),
     deepEqual = require('deep-equal');
 
 function keysAreDifferent(keys1, keys2){
@@ -74,7 +73,7 @@ WhatChanged.prototype.update = function(value){
         }
     }
 
-    this._lastValue = 'structure' in changesToTrack ? clone(value) : 'shallowStructure' in changesToTrack ? merge(value): value;
+    this._lastValue = 'structure' in changesToTrack ? clone(value) : 'shallowStructure' in changesToTrack ? clone(value, true, 1): value;
     this._lastReference = value;
     this._lastKeys = newKeys;
 

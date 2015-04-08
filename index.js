@@ -1,4 +1,5 @@
 var clone = require('clone'),
+    merge = require('flat-merge'),
     deepEqual = require('deep-equal');
 
 function keysAreDifferent(keys1, keys2){
@@ -58,7 +59,14 @@ WhatChanged.prototype.update = function(value){
     }
 
     if(value !== null && typeof value === 'object'){
-        if('structure' in changesToTrack && !deepEqual(value, this._lastValue)){
+        var lastValue = this._lastValue;
+
+        if('shallowStructure' in changesToTrack && (!lastValue || typeof lastValue !== 'object' || Object.keys(value).some(function(key, index){
+            return value[key[index]] !== lastValue[key[index]];
+        }))){
+            result.shallowStructure = true;
+        }
+        if('structure' in changesToTrack && !deepEqual(value, lastValue)){
             result.structure = true;
         }
         if('reference' in changesToTrack && value !== this._lastReference){
@@ -66,7 +74,7 @@ WhatChanged.prototype.update = function(value){
         }
     }
 
-    this._lastValue = 'structure' in changesToTrack ? clone(value) : value;
+    this._lastValue = 'structure' in changesToTrack ? clone(value) : 'shallowStructure' in changesToTrack ? merge(value): value;
     this._lastReference = value;
     this._lastKeys = newKeys;
 

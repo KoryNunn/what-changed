@@ -10,8 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "clone": "^1.0.2",
-    "deep-equal": "^0.2.1",
-    "node-v8-clone": "^0.6.2"
+    "deep-equal": "^0.2.1"
   },
   "devDependencies": {
     "grape": "^1.0.0"

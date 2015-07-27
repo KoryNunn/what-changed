@@ -50,7 +50,10 @@ WhatChanged.prototype.update = function(value){
     if('value' in changesToTrack && value+'' !== this._lastReference+''){
         result.value = true;
     }
-    if('type' in changesToTrack && typeof value !== typeof this._lastValue){
+    if(
+        'type' in changesToTrack && typeof value !== typeof this._lastValue ||
+        (value === null || this._lastValue === null) && this.value !== this._lastValue // typeof null === 'object'
+    ){
         result.type = true;
     }
     if('keys' in changesToTrack && keysAreDifferent(this._lastKeys, getKeys(value))){

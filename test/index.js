@@ -221,3 +221,27 @@ test('dont track value type change', function(t){
         {type:  true}
     );
 });
+
+test('type change to null', function(t){
+    t.plan(1);
+
+    var x = {},
+        whatChanged = new WhatChanged(x, 'type');
+
+    t.deepEqual(
+        whatChanged.update(null),
+        {type:  true}
+    );
+});
+
+test('type change from null', function(t){
+    t.plan(1);
+
+    var x = null,
+        whatChanged = new WhatChanged(x, 'type');
+
+    t.deepEqual(
+        whatChanged.update({}),
+        {type:  true}
+    );
+});

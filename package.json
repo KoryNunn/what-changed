@@ -1,6 +1,6 @@
 {
   "name": "what-changed",
-  "version": "2.1.3",
+  "version": "2.1.4",
   "description": "Provides an overview of how a value changed since the last time you checked.",
   "main": "index.js",
   "scripts": {

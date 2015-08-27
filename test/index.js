@@ -101,6 +101,29 @@ test('reference and structure', function(t){
     );
 });
 
+test('shallowStructure', function(t){
+    t.plan(2);
+
+    var x = {a:1, b:{a:1}},
+        whatChanged = new WhatChanged(x, 'shallowStructure');
+
+    x.b.a = 2;
+
+    t.deepEqual(
+        whatChanged.update(x),
+        {}
+    );
+
+    x.a = 2;
+
+    t.deepEqual(
+        whatChanged.update(x),
+        {
+            'shallowStructure': true
+        }
+    );
+});
+
 test('same reference, different keys', function(t){
     t.plan(1);
 

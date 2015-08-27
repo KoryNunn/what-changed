@@ -64,7 +64,7 @@ WhatChanged.prototype.update = function(value){
         var lastValue = this._lastValue;
 
         if('shallowStructure' in changesToTrack && (!lastValue || typeof lastValue !== 'object' || Object.keys(value).some(function(key, index){
-            return value[key[index]] !== lastValue[key[index]];
+            return value[key] !== lastValue[key];
         }))){
             result.shallowStructure = true;
         }

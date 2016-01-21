@@ -60,7 +60,7 @@ WhatChanged.prototype.update = function(value){
         result.keys = true;
     }
 
-    if(value !== null && typeof value === 'object'){
+    if(value !== null && typeof value === 'object' || typeof value === 'function'){
         var lastValue = this._lastValue;
 
         if('shallowStructure' in changesToTrack && (!lastValue || typeof lastValue !== 'object' || Object.keys(value).some(function(key, index){

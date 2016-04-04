@@ -1,5 +1,5 @@
 var clone = require('clone'),
-    deepEqual = require('deep-equal');
+    deepEqual = require('cyclic-deep-equal');
 
 function keysAreDifferent(keys1, keys2){
     if(keys1 === keys2){

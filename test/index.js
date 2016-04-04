@@ -268,3 +268,25 @@ test('type change from null', function(t){
         {type:  true}
     );
 });
+
+test('cyclic structures', function(t){
+    t.plan(2);
+
+    var x = {},
+        whatChanged = new WhatChanged(x, 'structure');
+
+    x.x = x;
+    x.a = 1;
+
+    t.deepEqual(
+        whatChanged.update(x),
+        {structure:  true}
+    );
+
+    x.a = '1';
+
+    t.deepEqual(
+        whatChanged.update(x),
+        {structure:  true}
+    );
+});

@@ -11,7 +11,8 @@ test('new', function(t){
         whatChanged.update(null),
         {
             type: true,
-            value: true
+            value: true,
+            any: true
         }
     );
 });
@@ -48,7 +49,10 @@ test('value', function(t){
 
     t.deepEqual(
         whatChanged.update(2),
-        {'value':true}
+        {
+            value:true,
+            any: true
+        }
     );
 });
 
@@ -62,7 +66,10 @@ test('reference', function(t){
 
     t.deepEqual(
         whatChanged.update(x),
-        {'reference': true}
+        {
+            reference: true,
+            any: true
+        }
     );
 });
 
@@ -77,8 +84,9 @@ test('keys', function(t){
     t.deepEqual(
         whatChanged.update(x),
         {
-            'keys': true,
-            'structure': true
+            keys: true,
+            structure: true,
+            any: true
         }
     );
 });
@@ -94,9 +102,10 @@ test('reference and structure', function(t){
     t.deepEqual(
         whatChanged.update(x),
         {
-            'structure': true,
-            'keys': true,
-            'reference': true
+            structure: true,
+            keys: true,
+            reference: true,
+            any: true
         }
     );
 });
@@ -119,7 +128,8 @@ test('shallowStructure', function(t){
     t.deepEqual(
         whatChanged.update(x),
         {
-            'shallowStructure': true
+            shallowStructure: true,
+            any: true
         }
     );
 });
@@ -135,8 +145,9 @@ test('same reference, different keys', function(t){
     t.deepEqual(
         whatChanged.update(x),
         {
-            'structure': true,
-            'keys': true
+            structure: true,
+            keys: true,
+            any: true
         }
     );
 });
@@ -151,7 +162,10 @@ test('same reference, different structure', function(t){
 
     t.deepEqual(
         whatChanged.update(x),
-        {'structure': true}
+        {
+            structure: true,
+            any: true
+        }
     );
 });
 
@@ -169,7 +183,8 @@ test('many changes', function(t){
     t.deepEqual(
         whatChanged.update(2),
         {
-            value: true
+            value: true,
+            any: true
         }
     );
 
@@ -177,14 +192,16 @@ test('many changes', function(t){
         whatChanged.update(true),
         {
             value: true,
-            type: true
+            type: true,
+            any: true
         }
     );
 
     t.deepEqual(
         whatChanged.update('true'),
         {
-            type: true
+            type: true,
+            any: true
         }
     );
 
@@ -197,7 +214,8 @@ test('many changes', function(t){
             value: true,
             keys: true,
             reference: true,
-            structure: true
+            structure: true,
+            any: true
         }
     );
 
@@ -207,7 +225,8 @@ test('many changes', function(t){
         whatChanged.update(x),
         {
             keys: true,
-            structure: true
+            structure: true,
+            any: true
         }
     );
 
@@ -216,7 +235,8 @@ test('many changes', function(t){
     t.deepEqual(
         whatChanged.update(x),
         {
-            structure: true
+            structure: true,
+            any: true
         }
     );
 });
@@ -241,7 +261,10 @@ test('dont track value type change', function(t){
 
     t.deepEqual(
         whatChanged.update(true),
-        {type:  true}
+        {
+            type:  true,
+            any: true
+        }
     );
 });
 
@@ -253,7 +276,10 @@ test('type change to null', function(t){
 
     t.deepEqual(
         whatChanged.update(null),
-        {type:  true}
+        {
+            type:  true,
+            any: true
+        }
     );
 });
 
@@ -265,7 +291,10 @@ test('type change from null', function(t){
 
     t.deepEqual(
         whatChanged.update({}),
-        {type:  true}
+        {
+            type:  true,
+            any: true
+        }
     );
 });
 
@@ -280,13 +309,19 @@ test('cyclic structures', function(t){
 
     t.deepEqual(
         whatChanged.update(x),
-        {structure:  true}
+        {
+            structure:  true,
+            any: true
+        }
     );
 
     x.a = '1';
 
     t.deepEqual(
         whatChanged.update(x),
-        {structure:  true}
+        {
+            structure:  true,
+            any: true
+        }
     );
 });

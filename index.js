@@ -49,15 +49,18 @@ WhatChanged.prototype.update = function(value){
 
     if('value' in changesToTrack && value+'' !== this._lastReference+''){
         result.value = true;
+        result.any = true;
     }
     if(
         'type' in changesToTrack && typeof value !== typeof this._lastValue ||
         (value === null || this._lastValue === null) && this.value !== this._lastValue // typeof null === 'object'
     ){
         result.type = true;
+        result.any = true;
     }
     if('keys' in changesToTrack && keysAreDifferent(this._lastKeys, getKeys(value))){
         result.keys = true;
+        result.any = true;
     }
 
     if(value !== null && typeof value === 'object' || typeof value === 'function'){
@@ -67,12 +70,15 @@ WhatChanged.prototype.update = function(value){
             return value[key] !== lastValue[key];
         }))){
             result.shallowStructure = true;
+            result.any = true;
         }
         if('structure' in changesToTrack && !deepEqual(value, lastValue)){
             result.structure = true;
+            result.any = true;
         }
         if('reference' in changesToTrack && value !== this._lastReference){
             result.reference = true;
+            result.any = true;
         }
     }
 

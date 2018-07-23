@@ -32,20 +32,23 @@ The following describes expected output based on how a value changes:
 ### 1, 2
 
     {
-        value: true
+        value: true,
+        any: true
     }
 
 ### 1, true
 
     {
         value: true,
-        type: true
+        type: true,
+        any: true
     }
 
 ### 1, '1'
 
     {
-        type: true
+        type: true,
+        any: true
     }
 
 ### {a:1}, {a:1} (same instance)
@@ -62,14 +65,16 @@ The following describes expected output based on how a value changes:
 
     {
         keys: true,
-        structure: true
+        structure: true,
+        any: true
     }
 
 
 ### {a:{b:1}}, {a:{b:2}} (same instance)
 
     {
-        structure: true
+        structure: true,
+        any: true
     }
 
 
@@ -78,5 +83,6 @@ The following describes expected output based on how a value changes:
     {
         reference: true,
         keys: true,
-        structure: true
+        structure: true,
+        any: true
     }

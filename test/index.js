@@ -91,6 +91,29 @@ test('keys', function(t){
     );
 });
 
+test('bulk keys', function(t){
+    t.plan(1);
+
+    var startTime = Date.now();
+
+    var x = {};
+    for(var i = 0; i < 1000; i++){
+        x[i] = i;
+    }
+    var whatChanged = new WhatChanged(x);
+
+    for(var i = 0; i < 100; i++){
+        whatChanged.update(x);
+    }
+
+    console.log(Date.now() - startTime);
+
+    t.deepEqual(
+        whatChanged.update(x),
+        {}
+    );
+});
+
 test('reference and structure', function(t){
     t.plan(1);
 

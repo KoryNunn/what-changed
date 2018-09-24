@@ -9,7 +9,7 @@ function keysAreDifferent(keys1, keys2){
         return true;
     }
     for(var i = 0; i < keys1.length; i++){
-        if(!~keys2.indexOf(keys1[i])){
+        if(keys1[i] !== keys2[i]){
             return true;
         }
     }
